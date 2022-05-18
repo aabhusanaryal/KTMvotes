@@ -27,13 +27,12 @@ let topVotes = 0; // total votes secured by `topCandidates`
 
 let resultOld = [{ name: "", votes: 0 }];
 let resultNew = [{ name: "", votes: 0 }];
-const interval = 0.1; // in minutes
+const interval = 1; // in minutes
 
 // Fetching data
 setInterval(() => {
   totalVotes = 0;
   topVotes = 0;
-  webhookURLs = process.env.WEBHOOKS.split(" ");
   // Moving the previous vote count to resultOld and adding new voute count in resultNew
   resultOld = [...resultNew];
 
@@ -48,7 +47,7 @@ setInterval(() => {
       // Looping through the list items
       listItems.each((idx, el) => {
         if (idx <= totalCandidates) {
-          const candidate = { name: "", votes: "" };
+          let candidate = { name: "", votes: "" };
           let candidateMeta = $(el)
             .children(".row")
             .children(".col")
@@ -100,7 +99,7 @@ function webhook() {
     .setAuthor(
       "KTM Metro Vote Count",
       "https://media.discordapp.net/attachments/974998328104337438/975001919158382612/pexels-element-digital-1550337.jpg?width=1023&height=682",
-      "https://election.ekantipur.com/pradesh-3/district-kathmandu/kathmandu?lng=eng"
+      url
     )
     .setColor("#42c700")
     .setFooter("Bot maintained by Aabhusan Aryal")
