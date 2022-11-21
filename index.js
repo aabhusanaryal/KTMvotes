@@ -141,7 +141,6 @@ async function main() {
     // In the first run, post all places' results
     resultNew.forEach((place) => {
       webhook(place);
-      tweet(place);
     });
   } else {
     resultNew.forEach((place) => {
