@@ -38,7 +38,6 @@ topVotes = 0;
 resultOld = [...resultNew];
 
 async function scrapeData(url, constituency) {
-  result = [];
   try {
     // Fetch HTML of the page
     const { data } = await axios.get(url);
@@ -47,6 +46,7 @@ async function scrapeData(url, constituency) {
     const listItems = $(
       `.col-md-6:nth-child(${constituency}) .candidate-list__item`
     );
+    result = [];
     // Looping through the list items
     listItems.each((idx, el) => {
       if (idx <= totalCandidates) {
@@ -85,6 +85,16 @@ let places = [
     constituency: "3",
     url: "https://election.ekantipur.com/pradesh-3/district-lalitpur?lng=eng",
   },
+  {
+    district: "Chitwan",
+    constituency: "2",
+    url: "https://election.ekantipur.com/pradesh-3/district-chitwan?lng=eng",
+  },
+  // {
+  //   district: "Test",
+  //   constituency: "1",
+  //   url: "http://127.0.0.1:5500/Kathmandu%20_%20Province%203%20-%20Nepal%20Election%20Latest%20Updates%20and%20Result%20for%20Federal%20Parliament.html",
+  // },
 ];
 
 async function populate() {
@@ -100,39 +110,72 @@ async function populate() {
       });
     });
   }
-  return "Done!";
+  return 1;
 }
+
 async function main() {
   await populate();
-  console.log(resultNew);
+  if (resultOld.length === 0) {
+    console.log("NEW RUN!!!");
+    resultOld = [...resultNew];
+    // In the first run, post all places' results
+    resultNew.forEach((place) => {
+      webhook(place);
+      // tweet(place)
+    });
+  } else {
+    resultNew.forEach((place) => {
+      old = resultOld.filter((p) => p.title == place.title)[0];
+      console.log(place.title, place.result);
+      if (
+        place.result[0]?.votes != old.result[0]?.votes ||
+        place.result[1]?.votes != old.result[1]?.votes ||
+        place.result[2]?.votes != old.result[2]?.votes
+      ) {
+        webhook(place);
+        tweet(place);
+      }
+    });
+    resultOld = [...resultNew];
+  }
 }
 
 main();
+setInterval(main, 60 * 1000);
 
-function tweet(title) {
-  let status = `------------------------------\n${title} Vote Count:\n------------------------------\n\n`;
-  resultNew.slice(0, topCandidates).forEach((candidate) => {
+function tweet(place) {
+  flag = 1; // will be 0 if any vote is NaN
+  let status = `--------------------\n${place.title} Vote Count:\n--------------------\n\n`;
+  place.result.slice(0, topCandidates).forEach((candidate) => {
+    if (candidate.vote == NaN) {
+      console.log("Vote is NaN");
+      flag = 0;
+    }
     status += `${candidate.name}: ${candidate.votes.toLocaleString()}\n`;
   });
-
-  status += "\n#LocalElections2022 #LocalElections2079";
-  client.post("statuses/update", { status }, function (error, tweet, response) {
-    if (error) throw error;
-  });
+  if (status.length < 250) status += "\n#Election2022 #Election2079";
+  console.log("Tweeting...", status.length);
+  console.log("\n\n", status);
+  if (flag)
+    client.post(
+      "statuses/update",
+      { status },
+      function (error, tweet, response) {
+        if (error) throw error;
+      }
+    );
 }
 
-function webhook(title) {
+function webhook(place) {
   const embed = new MessageBuilder()
     .setAuthor(
-      `${title} Vote Count`,
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Election_Commission%2C_Nepal.svg/800px-Election_Commission%2C_Nepal.svg.png",
-      url
+      `${place.title} Vote Count`,
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Election_Commission%2C_Nepal.svg/800px-Election_Commission%2C_Nepal.svg.png"
     )
     .setColor("#42c700")
     .setFooter("Bot maintained by Aabhusan Aryal")
     .setTimestamp();
-
-  resultNew.slice(0, topCandidates).forEach((candidate) => {
+  place.result.slice(0, topCandidates).forEach((candidate) => {
     embed.addField(candidate.name, candidate.votes.toLocaleString());
   });
   hooks.forEach((hook) => {
