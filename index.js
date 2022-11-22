@@ -119,18 +119,22 @@ let places = [
 ];
 
 async function populate() {
-  resultNew = [];
+  let tempResult = [];
+  let flag = 1; // newResult is replaced by tempResult iff flag =1
+  // and flag = 1 when none of the result array is empty
   for (let i = 0; i < places.length; i++) {
     let place = places[i];
     await scrapeData(place.url, place.constituency).then((result) => {
-      resultNew.push({
+      tempResult.push({
         title: `${place.district}-${place.constituency}`,
         district: place.district,
         constituency: place.constituency,
         result: result,
       });
+      if (result.length === 0) flag = 0;
     });
   }
+  if (flag) resultNew = [...tempResult];
   return 1;
 }
 
