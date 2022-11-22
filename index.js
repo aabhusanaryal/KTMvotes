@@ -63,6 +63,7 @@ async function scrapeData(url, constituency) {
         result.push({ name, votes });
       }
     });
+    console.log("!!!!!", result);
     return result;
   } catch (err) {
     console.error(err);
@@ -147,9 +148,10 @@ async function main() {
       old = resultOld.filter((p) => p.title == place.title)[0];
       console.log(place.title, place.result);
       if (
-        place.result[0]?.votes != old.result[0]?.votes ||
-        place.result[1]?.votes != old.result[1]?.votes ||
-        place.result[2]?.votes != old.result[2]?.votes
+        (place.result[0]?.votes != old.result[0]?.votes ||
+          place.result[1]?.votes != old.result[1]?.votes ||
+          place.result[2]?.votes != old.result[2]?.votes) &&
+        place.result.length != 0
       ) {
         webhook(place);
         tweet(place);
