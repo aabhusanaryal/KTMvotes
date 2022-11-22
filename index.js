@@ -76,24 +76,31 @@ let places = [
     constituency: "1",
     url: "https://election.ekantipur.com/pradesh-7/district-dadeldhura?lng=eng",
   },
-  {
-    district: "Kathmandu",
-    constituency: "1",
-    url: "https://election.ekantipur.com/pradesh-3/district-kathmandu?lng=eng",
-  },
+  // Count complete
+  // {
+  //   district: "Kathmandu",
+  //   constituency: "1",
+  //   url: "https://election.ekantipur.com/pradesh-3/district-kathmandu?lng=eng",
+  // },
   {
     district: "Kathmandu",
     constituency: "2",
     url: "https://election.ekantipur.com/pradesh-3/district-kathmandu?lng=eng",
   },
+  // Count complete
+  // {
+  //   district: "Kathmandu",
+  //   constituency: "4",
+  //   url: "https://election.ekantipur.com/pradesh-3/district-kathmandu?lng=eng",
+  // },
   {
     district: "Kathmandu",
-    constituency: "4",
+    constituency: "5",
     url: "https://election.ekantipur.com/pradesh-3/district-kathmandu?lng=eng",
   },
   {
     district: "Kathmandu",
-    constituency: "5",
+    constituency: "7",
     url: "https://election.ekantipur.com/pradesh-3/district-kathmandu?lng=eng",
   },
   {
