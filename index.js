@@ -71,43 +71,43 @@ async function scrapeData(url, constituency) {
 }
 
 let places = [
-  {
-    district: "Dadeldhura",
-    constituency: "1",
-    url: "https://election.ekantipur.com/pradesh-7/district-dadeldhura?lng=eng",
-  },
+  // {
+  //   district: "Dadeldhura",
+  //   constituency: "1",
+  //   url: "https://election.ekantipur.com/pradesh-7/district-dadeldhura?lng=eng",
+  // },
   // Count complete
   // {
   //   district: "Kathmandu",
   //   constituency: "1",
   //   url: "https://election.ekantipur.com/pradesh-3/district-kathmandu?lng=eng",
   // },
-  {
-    district: "Kathmandu",
-    constituency: "2",
-    url: "https://election.ekantipur.com/pradesh-3/district-kathmandu?lng=eng",
-  },
+  // {
+  //   district: "Kathmandu",
+  //   constituency: "2",
+  //   url: "https://election.ekantipur.com/pradesh-3/district-kathmandu?lng=eng",
+  // },
   // Count complete
   // {
   //   district: "Kathmandu",
   //   constituency: "4",
   //   url: "https://election.ekantipur.com/pradesh-3/district-kathmandu?lng=eng",
   // },
-  {
-    district: "Kathmandu",
-    constituency: "5",
-    url: "https://election.ekantipur.com/pradesh-3/district-kathmandu?lng=eng",
-  },
-  {
-    district: "Kathmandu",
-    constituency: "7",
-    url: "https://election.ekantipur.com/pradesh-3/district-kathmandu?lng=eng",
-  },
-  {
-    district: "Kathmandu",
-    constituency: "8",
-    url: "https://election.ekantipur.com/pradesh-3/district-kathmandu?lng=eng",
-  },
+  // {
+  //   district: "Kathmandu",
+  //   constituency: "5",
+  //   url: "https://election.ekantipur.com/pradesh-3/district-kathmandu?lng=eng",
+  // },
+  // {
+  //   district: "Kathmandu",
+  //   constituency: "7",
+  //   url: "https://election.ekantipur.com/pradesh-3/district-kathmandu?lng=eng",
+  // },
+  // {
+  //   district: "Kathmandu",
+  //   constituency: "8",
+  //   url: "https://election.ekantipur.com/pradesh-3/district-kathmandu?lng=eng",
+  // },
   {
     district: "Lalitpur",
     constituency: "3",
@@ -117,6 +117,16 @@ let places = [
     district: "Chitwan",
     constituency: "2",
     url: "https://election.ekantipur.com/pradesh-3/district-chitwan?lng=eng",
+  },
+  {
+    district: "Illam",
+    constituency: "1",
+    url: "https://election.ekantipur.com/pradesh-1/district-illam?lng=eng",
+  },
+  {
+    district: "Morang",
+    constituency: "6",
+    url: "https://election.ekantipur.com/pradesh-1/district-morang?lng=eng",
   },
   // {
   //   district: "Test",
