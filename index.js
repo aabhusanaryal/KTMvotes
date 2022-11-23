@@ -109,6 +109,11 @@ let places = [
   //   url: "https://election.ekantipur.com/pradesh-3/district-kathmandu?lng=eng",
   // },
   {
+    district: "Gulmi",
+    constituency: "1",
+    url: "https://election.ekantipur.com/pradesh-5/district-gulmi?lng=eng",
+  },
+  {
     district: "Lalitpur",
     constituency: "3",
     url: "https://election.ekantipur.com/pradesh-3/district-lalitpur?lng=eng",
